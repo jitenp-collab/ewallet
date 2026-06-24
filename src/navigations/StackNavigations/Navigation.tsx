@@ -14,8 +14,25 @@ const Stack = createNativeStackNavigator();
 const Navigation = ({ children }: any) => {
   const dispatch = useDispatch<Appdispatch>();
 
+  const linking: any = {
+    prefixes: ['myapp://'],
+    config: {
+      screens: {
+        bottomTab: {
+          screens: {
+            Home: 'open',
+            Graph: 'graph',
+            Profile: 'profile',
+          },
+        },
+        Recipt: 'recipt',
+      },
+    },
+  };
+
   return (
     <NavigationContainer
+      linking={linking}
       ref={navigationref}
       onReady={() => {
         const name = navigationref.getCurrentRoute().name;
@@ -29,7 +46,7 @@ const Navigation = ({ children }: any) => {
       {children}
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen component={BottomTabNavigation} name="bottomTab" />
-        <Stack.Screen component={Recipt} name='Recipt' />
+        <Stack.Screen component={Recipt} name="Recipt" />
       </Stack.Navigator>
     </NavigationContainer>
   );
